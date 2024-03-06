@@ -23,7 +23,7 @@ function App() {
         <Route path="update/:id" element={<AddEvent/>}  />
 
         </Route>
-        {/* <Route path="details/:nom" element={<EventDetails/>} /> */}
+       
        
 
         <Route path="*" element={<><p>Not found</p></>} />

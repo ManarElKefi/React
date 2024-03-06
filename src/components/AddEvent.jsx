@@ -45,15 +45,7 @@ const navigate= useNavigate()
 
  }
  
- 
 
-//    const AddEvents=async()=>{
- 
-//  const resultat=await addEvent(EventItem);
- 
-//    if(resultat.status==201)
-//       navigate('/events')
-//    } 
 const AddEvents = async () => {
   if (id!=null) {
     await editEvent(id,EventItem);
@@ -66,7 +58,7 @@ const AddEvents = async () => {
 
   return (
     <Container style={{ marginTop: "30px" }}>
-      <h2>Add a new Event to your Event List</h2>
+      <h2>Event Form</h2>
       <Form>
         <Form.Group className="mb-3">
           <Form.Label>Name</Form.Label>
