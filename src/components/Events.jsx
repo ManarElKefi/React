@@ -1,44 +1,63 @@
 import Event from "./Event";
-import listEvent from "../data/events.json";
-import { Row } from "react-bootstrap";
+//import listEvent from "..";
+import { Row, Alert } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import Alert from 'react-bootstrap/Alert';
-export default function Events(){
-    const [showAlert,setShowalert] = useState(false);
-    const [showWelcome,setShowwelcome] = useState(false)
-    const modifAlert=()=> {
-        setShowalert(true);
-        setTimeout(() => setShowalert(false),1000);
-    }
+import { deleteEvent, getallEvents } from "../services/api";
 
-    useEffect(() => {
-        setShowwelcome(true),
-       setTimeout(() => setShowwelcome(false),3000)
-        return () => {
-            console.log("Welcome unmounting");
-           // clearTimeout(() => result)
-        } 
-    })
-    return <>
-{showWelcome && <Alert variant="success">
-    Bienvenue
-    </Alert>}
+export default function Events() {
+   const [showAlert, setShowalert] = useState(false)
+   const [showmessage, setmessage] = useState(false)
+   const [listEvent, setListEvents] = useState([])
+
+   const modificationalert = () => {
+      setShowalert(true),
+         setTimeout(() => setShowalert(), 1000);
+   }
+
+   useEffect(() => {
+      setmessage(true),
+         setTimeout(() => setmessage(false), 1000);
+      return () => {
+         console.log('unmontage ')
+         //  clearTimeout(() => "hello",1000);
+
+      }
+   }, [])// pour afficher le message une seul fois 
+
+   useEffect(() => {
+      const fetchlist = async () => {
+         const events = await getallEvents();
+         setListEvents(events.data);
+      }
+      fetchlist();
+   }, [])
 
 
-<Row>
-{
-    listEvent?.map((element,index) => {
-        return <Event key={index} e={element} functionAlert={modifAlert}
-            
-        />
-    })
+
+
+   const deleteEvents = async (id) => {
+      // console.log(e.id)
+      await deleteEvent(id)
+      setListEvents(listEvent.filter((e) => e.id != id))
+      console.log(listEvent)
+   }
+    
+
+   return <>
+      <Row>
+         {
+            showmessage && <Alert variant="success">
+               Welcome to our events  </Alert>
+         }
+         {listEvent?.map((element, index) => {
+            return <Event key={index} e={element} functionalert={modificationalert} deleteevent={deleteEvents}  />
+
+         })}
+         {
+            showAlert && <Alert variant="success">
+               You have booked an event
+            </Alert>
+         }
+      </Row>
+   </>
 }
-</Row>
-
-{showAlert && <Alert variant="Success">
-         You have booked an event !
-        </Alert>
-}
-    </>
-}
-

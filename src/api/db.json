@@ -1,0 +1,24 @@
+{
+  "events": [
+    {
+      "id": "b5bd",
+      "name": "event",
+      "description": "Join us",
+      "img": "music.jpg",
+      "price": "60",
+      "nbTickets": "100",
+      "nbParticipants": 0,
+      "like": false
+    },
+    {
+      "id": "92d9",
+      "name": "musicEvent",
+      "description": "This event is about music",
+      "img": "music.jpg",
+      "price": "50",
+      "nbTickets": "120",
+      "nbParticipants": 0,
+      "like": false
+    }
+  ]
+}
